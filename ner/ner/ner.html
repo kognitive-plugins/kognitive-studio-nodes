@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  RED.nodes.registerType('ner',{
+      category: 'kognitive',
+      color: '#4AA8FF',
+      defaults: {
+          name: {value:""},
+          apikey: {value:"",required:true}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "icon.svg",
+      label: function() {
+          return this.name||"named-entity-recognition";
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="ner">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-apikey"><i class="fa fa-key"></i> api-key</label>
+    <input type="text" id="node-input-apikey" placeholder="api-key">
+</div>
+</script>
+
+<script type="text/html" data-help-name="ner">
+  <p>A node that detects entities from the input.</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">object</span>
+        </dt>
+        <dd> The payload of the message. It must contain the input value.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>payload <span class="property-type">object</span></dt>
+                <dd>The entities detected from the input</dd>
+            </dl>
+        </li>
+        <li>Standard error
+            <dl class="message-properties">
+                <dt>payload <span class="property-type">object</span></dt>
+                <dd>The standard error of the command.</dd>
+            </dl>
+        </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p><code>msg.payload.input</code> contains the text.</p>
+    <p>The output is sent as <code>msg.payload </code> and contains the entities detected.</p>
+</script>

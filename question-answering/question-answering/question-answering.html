@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  RED.nodes.registerType('question-answering',{
+      category: 'kognitive',
+      color: '#4AA8FF',
+      defaults: {
+          name: {value:""},
+          apikey: {value:"",required:true}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "icon.svg",
+      label: function() {
+          return this.name||"question-answering";
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="question-answering">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-apikey"><i class="fa fa-key"></i> api-key</label>
+    <input type="text" id="node-input-apikey" placeholder="api-key">
+</div>
+</script>
+
+<script type="text/html" data-help-name="question-answering">
+  <p>A node that answer a question by context in message payload.</p>
+
+  <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">object</span>
+        </dt>
+        <dd> The payload of the message. It must contain the question and the context.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>payload <span class="property-type">object</span></dt>
+                <dd>The answer to the question and the score</dd>
+            </dl>
+        </li>
+        <li>Standard error
+            <dl class="message-properties">
+                <dt>payload <span class="property-type">object</span></dt>
+                <dd>The standard error of the command.</dd>
+            </dl>
+        </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p><code>msg.payload.question</code> contains the question.</p>
+    <p><code>msg.payload.context</code> contains the context.</p>
+    <p>The output is sent as <code>msg.payload </code> and contains <code>msg.payload.answer</code> the answer to the question in the context. and <code>msg.payload.score</code> the score.</p>
+</script>
